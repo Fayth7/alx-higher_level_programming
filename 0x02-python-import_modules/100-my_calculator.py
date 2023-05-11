@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+import sys
+from calculator_1 import add, sub, mul, div
+
+def calculate(a, operator, b):
+    if operator == "+":
+        result = add(a, b)
+    elif operator == "-":
+        result = subtract(a, b)
+    elif operator == "*":
+        result = multiply(a, b)
+    elif operator == "/":
+        result = divide(a, b)
+    else:
+        return "Unknown operator. Available operators: +, -, * and /"
+
+    return "{} {} {} = {}".format(a, operator, b, result)
+
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        print("Usage: ./100-my_calculator.py <a> <operator> <b>")
+        sys.exit(1)
+
+    a = int(sys.argv[1])
+    operator = sys.argv[2]
+    b = int(sys.argv[3])
+
+    result = calculate(a, operator, b)
+    print(result)

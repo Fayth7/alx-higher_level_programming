@@ -1,0 +1,14 @@
+#!/usr/bin/python3
+import sys
+
+arguments = sys.argv[1:]
+num_arguments = len(arguments)
+
+print("Number of argument(s):", num_arguments)
+
+if num_arguments == 0:
+    print(".", end="\n")
+else:
+    print(":", end="\n")
+    for i, argument in enumerate(arguments, start=1):
+        print("{}: {}".format(i, argument))
