@@ -1,0 +1,96 @@
+#include "lists.h"
+#include <stdlib.h>
+/**
+ * reverse_listint - Reverses a singly-linked listint_t list.
+ * @head: A pointer to the starting node of the list to reverse.
+ *
+ * Return: A pointer to the head of the reversed list.
+ */
+
+typedef struct listint
+{
+int data;
+struct listint *next;
+}
+listint_t;
+
+int is_palindrome(listint_t **head)
+{
+if (*head == NULL || (*head)->next == NULL)
+{
+return (1); /** Empty list or single node list is considered a palindrome*/
+}
+
+listint_t *slow = *head;
+listint_t *fast = *head;
+listint_t *prev = NULL;
+listint_t *temp;
+
+/** Find the middle of the list and reverse the first half*/
+while (fast != NULL && fast->next != NULL)
+{
+fast = fast->next->next;
+temp = slow->next;
+slow->next = prev;
+prev = slow;
+slow = temp;
+}
+
+if (fast != NULL)
+{
+slow = slow->next; /** Skip the middle node for odd length list*/
+}
+
+/** Compare the reversed first half with the second half*/
+while (prev != NULL && slow != NULL)
+{
+if (prev->data != slow->data)
+{
+return (0);
+/** Not a palindrome*/
+}
+prev = prev->next;
+slow = slow->next;
+}
+
+return (1);
+/** Palindrome*/
+}
+
+int main()
+{
+/** Test the function*/
+listint_t *head = NULL;
+listint_t *node1 = malloc(sizeof(listint_t));
+listint_t *node2 = malloc(sizeof(listint_t));
+listint_t *node3 = malloc(sizeof(listint_t));
+listint_t *node4 = malloc(sizeof(listint_t));
+
+node1->data = 1;
+node1->next = node2;
+node2->data = 2;
+node2->next = node3;
+node3->data = 2;
+node3->next = node4;
+node4->data = 1;
+node4->next = NULL;
+ 
+head = node1;
+
+int result = is_palindrome(&head);
+if (result == 1)
+{
+printf("The linked list is a palindrome.\n");
+}
+else
+{
+printf("The linked list is not a palindrome.\n");
+
+/**Free memory*/
+free(node1);
+free(node2);
+free(node3);
+free(node4);
+
+return (0);
+}
