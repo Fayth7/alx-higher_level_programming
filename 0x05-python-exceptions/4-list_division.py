@@ -20,4 +20,7 @@ def list_division(my_list_1, my_list_2, list_length):
             result.append(quotient)
         except Exception as e:
             result.append(0)
+        finally:
+            # Code to be executed regardless of whether an exception occurs or not
+            pass
     return (result)
