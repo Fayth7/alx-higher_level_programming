@@ -1,0 +1,45 @@
+0;276;0c# 0-add_integer.txt
+
+===========================
+How to Use 0-add_integer.py
+===========================
+
+This module defines an integer addition function ``add_integer(a, b=98)``.
+
+Usage
+=====
+
+``add_integer(...)``` returns the addition of its two arguments. For numbers,
+that value is equivalent to using the ``+`` operator.
+
+::
+# Test cases
+
+>>> add_integer = __import__('0-add_integer').add_integer
+
+>>> add_integer(1, 2)
+3
+
+>>> add_integer(100, -2)
+98
+
+>>> add_integer(2)
+100
+
+>>> add_integer(100.3, -2)
+98
+
+>>> add_integer(0, 0)
+0
+
+>>> add_integer(-1, -1)
+-2
+
+>>> add_integer(10, -10)
+0
+
+>>> add_integer(1000, 1000)
+2000
+
+>>> add_integer(1_000_000, 1_000_000)
+2_000_000
