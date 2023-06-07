@@ -1,3 +1,11 @@
+#!/usr/bin/python3
+"""Defines a function that divides all elements of a matrix.
+
+Attributes:
+    matrix_divided: divides all elements of a matrix.
+"""
+
+
 def matrix_divided(matrix, div):
     """
     Divide all elements of a matrix by a divisor.
@@ -25,8 +33,9 @@ def matrix_divided(matrix, div):
         >>> matrix_divided([[1, 2], [3, 4], [5, 6]], 0.5)
         [[2.0, 4.0], [6.0, 8.0], [10.0, 12.0]]
     """
-    if not isinstance(matrix, list) or any(not isinstance(row, list) for row in matrix):
-        raise TypeError("matrix must be a matrix (list of lists) of integers/floats")
+    if not isinstance(matrix, list) or \
+            any(not isinstance(row, list) for row in matrix):
+        raise TypeError("matrix must be a matrix of integers/floats")
 
     row_sizes = set(len(row) for row in matrix)
     if len(row_sizes) > 1:
@@ -38,5 +47,8 @@ def matrix_divided(matrix, div):
     if div == 0:
         raise ZeroDivisionError("division by zero")
 
-    new_matrix = [[round(element / div, 2) for element in row] for row in matrix]
+    new_matrix = [
+        [round(element / div, 2) for element in row]
+        for row in matrix
+    ]
     return new_matrix

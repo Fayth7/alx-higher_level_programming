@@ -1,4 +1,4 @@
-B11;rgb:0000/0000/00000;276;0c# 0-add_integer.txt
+# 0-add_integer.txt
 
 ===========================
 How to Use 0-add_integer.py
