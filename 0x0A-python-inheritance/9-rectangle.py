@@ -3,6 +3,7 @@
 
 
 class BaseGeometry:
+    """Reprsent base geometry."""
     def area(self):
         raise Exception("area() is not implemented.")
 
@@ -14,6 +15,7 @@ class BaseGeometry:
 
 
 class Rectangle(BaseGeometry):
+    """Represent a rectangle using BaseGeometry."""
     def __init__(self, width, height):
         self.__width = 0
         self.__height = 0
