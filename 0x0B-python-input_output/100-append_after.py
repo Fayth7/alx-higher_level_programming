@@ -1,6 +1,12 @@
+#!/usr/bin/python3
+"""
+Module for append_after method.
+"""
+
+
 def append_after(filename="", search_string="", new_string=""):
     """
-    Inserts a line of text after each line containing a specific string in a file.
+    Inserts line of text after each line containing specific string in a file.
     """
     with open(filename, 'r+') as file:
         lines = file.readlines()
@@ -11,4 +17,4 @@ def append_after(filename="", search_string="", new_string=""):
             if search_string in line:
                 file.write(new_string)
 
-        file.truncate()  # Remove any remaining content after writing the modified lines
+        file.truncate()
