@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines a base model class."""
+0;276;0c11;rgb:0000/0000/0000"""Defines a base model class."""
 
 
 import json
@@ -55,7 +55,12 @@ class Base:
         """
         if json_string is None or len(json_string) == 0:
             return []
-        return json.loads(json_string)
+        dictionaries = json.loads(json_string)
+        instances = []
+        for dictionary in dictionaries:
+            instance = Base.create(**dictionary)
+            instances.append(instance)
+        return instances
 
     @classmethod
     def save_to_file(cls, list_objs):
@@ -79,17 +84,22 @@ class Base:
         Returns an instance with all attributes already set.
 
         Args:
-            **dictionary: Double pointer to a dictionary.
+        **dictionary: Double pointer to a dictionary.
 
         Returns:
-            Instance with attributes set.
+        Instance with attributes set.
         """
-        if cls.__name__ == "Rectangle":
+        if dictionary is None or len(dictionary) == 0:
+            dummy = cls()
+        elif cls.__name__ == "Rectangle":
             dummy = cls(1, 1)
         elif cls.__name__ == "Square":
             dummy = cls(1)
+        else:
+            dummy = cls()
         dummy.update(**dictionary)
         return dummy
+
 
     @classmethod
     def load_from_file(cls):
@@ -146,14 +156,17 @@ class Base:
         except FileNotFoundError:
             return []
 
+
     def to_dictionary(self):
         """
         Returns the dictionary representation of the instance.
 
         Returns:
-            dict: Dictionary representation of the instance.
+        dict: Dictionary representation of the instance.
         """
-        raise NotImplementedError("The to_dictionary() method must be implemented.")
+        return {
+            'id': self.id,
+        }
 
     def update(self, *args, **kwargs):
         """
@@ -179,11 +192,10 @@ class Base:
         Returns the CSV row representation of the instance.
 
         Returns:
-            list: CSV row representation of the instance.
+        list: CSV row representation of the instance.
         """
-        raise NotImplementedError("The to_csv_row() method must be implemented.")
+        return [self.id, self.width, self.height, self.x, self.y]
 
-    @staticmethod
     def from_csv_row(row):
         """
         Returns the dictionary representation of a CSV row.
