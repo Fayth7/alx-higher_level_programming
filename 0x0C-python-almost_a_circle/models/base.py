@@ -18,8 +18,8 @@ class Base:
         Class constructor.
 
         Args:
-            id (int, optional): If provided, assign this value to the id attribute.
-                Otherwise, increment __nb_objects and assign the new value to id.
+            id (int, optional): If provided, assign the value to id attribute.
+                Otherwise, increment __nb_objects and assign new value to id.
         """
         if id is not None:
             self.id = id
@@ -55,8 +55,10 @@ class Base:
         """
         if json_string is None or len(json_string) == 0:
             return []
-        return [cls.create(**dictionary) for dictionary in cls.from_json_string(json_string)]
-
+        return [
+            cls.create(**dictionary)
+            for dictionary in cls.from_json_string(json_string)
+        ]
 
     @classmethod
     def save_to_file(cls, list_objs):
@@ -70,7 +72,10 @@ class Base:
             None.
         """
         filename = cls.__name__ + ".json"
-        json_string = cls.to_json_string([obj.to_dictionary() for obj in list_objs])
+        json_string = cls.to_json_string(
+            [obj.to_dictionary() for obj in list_objs]
+        )
+
         with open(filename, "w") as file:
             file.write(json_string)
 
@@ -96,7 +101,6 @@ class Base:
         dummy.update(**dictionary)
         return dummy
 
-
     @classmethod
     def load_from_file(cls):
         """
@@ -110,7 +114,10 @@ class Base:
             with open(filename, "r") as file:
                 json_string = file.read()
                 dictionaries = cls.from_json_string(json_string)
-                return [cls.create(**dictionary) for dictionary in dictionaries]
+                return [
+                    cls.create(**dictionary)
+                    for dictionary in dictionaries
+                ]
         except FileNotFoundError:
             return []
 
@@ -151,7 +158,6 @@ class Base:
                 return instances
         except FileNotFoundError:
             return []
-
 
     def to_dictionary(self):
         """
@@ -202,4 +208,6 @@ class Base:
         Returns:
             dict: Dictionary representation of the CSV row.
         """
-        raise NotImplementedError("The from_csv_row() method must be implemented.")
+        raise NotImplementedError(
+            "The from_csv_row() method must be implemented."
+        )
