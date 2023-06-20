@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-0;276;0c11;rgb:0000/0000/0000"""Defines a base model class."""
+"""Defines a base model class."""
 
 
 import json
@@ -55,12 +55,8 @@ class Base:
         """
         if json_string is None or len(json_string) == 0:
             return []
-        dictionaries = json.loads(json_string)
-        instances = []
-        for dictionary in dictionaries:
-            instance = Base.create(**dictionary)
-            instances.append(instance)
-        return instances
+        return [cls.create(**dictionary) for dictionary in cls.from_json_string(json_string)]
+
 
     @classmethod
     def save_to_file(cls, list_objs):
