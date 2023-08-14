@@ -1,0 +1,1 @@
+These are my initial Java Script files as I start my exciting learning adventure of this coding language
