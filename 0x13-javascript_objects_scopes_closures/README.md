@@ -1,0 +1,1 @@
+In these files, I attempt to answer the coursework for the second assignment for JavaScript
