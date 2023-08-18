@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """
-Lists all State objects from the database hbtn_0e_6_usa.
-Usage: ./7-model_state_fetch_all.py <mysql username> /
-                                    <mysql password> /
-                                    <database name>
+Adds the State object "Louisiana" to the database hbtn_0e_6_usa.
+Usage: ./11-model_state_insert.py <mysql username> /
+                                  <mysql password> /
+                                  <database name>
 """
+
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -24,8 +25,10 @@ def main():
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for state in session.query(State).order_by(State.id):
-        print(f"{state.id}: {state.name}")
+    louisiana = State(name="Louisiana")
+    session.add(louisiana)
+    session.commit()
+    print(louisiana.id)
 
     session.close()
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Displays values in the states table of hbtn_0e_0_usa where name matches the argument.
+Displays values in states table hbtn_0e_0_usa where name matches the argument.
 """
 
 import sys

@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 """
-Lists all State objects from the database hbtn_0e_6_usa.
-Usage: ./7-model_state_fetch_all.py <mysql username> /
-                                    <mysql password> /
-                                    <database name>
+Changes the name of the State object with id = 2 to
+New Mexico in the database hbtn_0e_6_usa.
+Usage: ./12-model_state_update_id_2.py <mysql username> /
+                                       <mysql password> /
+                                       <database name>
 """
+
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -24,8 +26,10 @@ def main():
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for state in session.query(State).order_by(State.id):
-        print(f"{state.id}: {state.name}")
+    state = session.query(State).get(2)
+    if state:
+        state.name = "New Mexico"
+        session.commit()
 
     session.close()
 
