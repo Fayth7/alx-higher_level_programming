@@ -1,16 +1,14 @@
 #!/usr/bin/python3
 """
-Lists all State objects from the database hbtn_0e_6_usa.
-Usage: ./7-model_state_fetch_all.py <mysql username> /
-                                    <mysql password> /
-                                    <database name>
+Prints the first State object from the database hbtn_0e_6_usa.
 """
+
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model_state import State
 
-def main():
+if __name__ == "__main__":
     if len(sys.argv) != 4:
         print("Usage: {} <mysql username> <mysql password> <database>".format(sys.argv[0]))
         sys.exit(1)
@@ -20,10 +18,11 @@ def main():
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for state in session.query(State).order_by(State.id):
-        print(f"{state.id}: {state.name}")
+    first_state = session.query(State).order_by(State.id).first()
+    
+    if first_state:
+        print(f"{first_state.id}: {first_state.name}")
+    else:
+        print("Nothing")
 
     session.close()
-
-if __name__ == "__main__":
-    main()
