@@ -1,43 +1,22 @@
 #!/usr/bin/python3
 """
-Lists all cities of a specified state from the database hbtn_0e_4_usa.
+Displays all cities of a given state from the
+states table of the database hbtn_0e_4_usa.
+Safe from SQL injections.
+Usage: ./5-filter_cities.py <mysql username> \
+                            <mysql password> \
+                            <database name> \
+                            <state name searched>
 """
-
 import sys
 import MySQLdb
 
-
-def main():
-    if len(sys.argv) != 5:
-        print("Usage: {} <username> <password> <database> <state_name>".format(
-            sys.argv[0]))
-        sys.exit(1)
-
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-    state_name = sys.argv[4]
-
-    try:
-        db = MySQLdb.connect(host="localhost", port=3306,
-                             user=username, passwd=password, db=database)
-        cur = db.cursor()
-        query = """
-        SELECT GROUP_CONCAT(cities.name SEPARATOR ', ')
-        FROM cities
-        JOIN states ON cities.state_id = states.id
-        WHERE states.name = %s
-        """
-        cur.execute(query, (state_name,))
-        row = cur.fetchone()
-        if row:
-            print(row[0])
-        cur.close()
-        db.close()
-    except MySQLdb.Error as e:
-        print("MySQL Error:", e)
-        sys.exit(1)
-
-
 if __name__ == "__main__":
-    main()
+    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
+    c = db.cursor()
+    c.execute("SELECT * FROM `cities` as `c` \
+                INNER JOIN `states` as `s` \
+                   ON `c`.`state_id` = `s`.`id` \
+                ORDER BY `c`.`id`")
+    print(", ".join([ct[2] for ct in c.fetchall() if ct[4] == sys.argv[4]]))
+    
