@@ -22,9 +22,7 @@ def main():
         db = MySQLdb.connect(host="localhost", port=3306,
                              user=username, passwd=password, db=database)
         cur = db.cursor()
-        query = ("SELECT * FROM states "
-                 "WHERE name = %s COLLATE latin1_general_cs "
-                 "ORDER BY id ASC")
+        query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
         cur.execute(query, (state_name,))
 
         cur.execute(query, (state_name,))
