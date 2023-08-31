@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Find a peak """
 
+
 def find_peak(list_of_integers):
     if not list_of_integers:
         return None
@@ -14,7 +15,5 @@ def find_peak(list_of_integers):
             low = mid + 1
         else:
             high = mid
-            
-    return list_of_integers[low]
 
-                                                                        
+    return list_of_integers[low]
