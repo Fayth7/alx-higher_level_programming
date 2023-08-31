@@ -1,17 +1,20 @@
 #!/usr/bin/python3
+""" Find a peak """
+
 def find_peak(list_of_integers):
     if not list_of_integers:
         return None
 
-    start, end = 0, len(list_of_integers) - 1
+    length = len(list_of_integers)
+    low, high = 0, length - 1
 
-    while start < end:
-        mid = (start + end) // 2
-        if list_of_integers[mid] > list_of_integers[mid - 1]:
-            if list_of_integers[mid] > list_of_integers[mid + 1]:
-                return list_of_integers[mid]
-            start = mid + 1
+    while low < high:
+        mid = (low + high) // 2
+        if list_of_integers[mid] <= list_of_integers[mid + 1]:
+            low = mid + 1
         else:
-            end = mid - 1
+            high = mid
+            
+    return list_of_integers[low]
 
-    return list_of_integers[start]
+                                                                        
