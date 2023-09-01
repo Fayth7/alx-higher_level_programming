@@ -2,7 +2,7 @@
 """
 Find a peak in a list of integers.
 
-This function takes a list of unsorted integers as input and 
+This function takes a list of unsorted integers as input and
 returns a peak value from the list
 
 Args:
