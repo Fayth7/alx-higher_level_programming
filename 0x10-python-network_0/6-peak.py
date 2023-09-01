@@ -1,5 +1,18 @@
 #!/usr/bin/python3
-""" Find a peak """
+"""
+Find a peak in a list of integers.
+
+This function takes a list of unsorted integers as input and 
+returns a peak value from the list
+
+Args:
+    list_of_integers (List[int]): A list of unsorted integers.
+
+Returns:
+    int: The peak value found in the list.
+
+If the list is empty, the function returns None.
+"""
 
 
 def find_peak(list_of_integers):
